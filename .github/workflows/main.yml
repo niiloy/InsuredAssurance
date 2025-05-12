@@ -34,7 +34,7 @@ jobs:
           first_ssh: |
             sudo curl -l -u admin:${{ secrets.JENKINS_PASSWORD }} http://localhost:8080/job/deploy-insured-assurance/build?token=${{ secrets.JENKINS_REMOTEJOB_TOKEN }}
           scp: |
-            './target/*.war' => /var/lib/jenkins/workspace/deploy-insured-assurance/target
+            './target/*.war' => /tmp
           last_ssh: |
-            ls -al /var/lib/jenkins/workspace/deploy-insured-assurance/target
+            ls -al /tmp
       
