@@ -23,4 +23,18 @@ jobs:
         with:
          name: insured-assurance
          path: /home/runner/work/InsuredAssurance/InsuredAssurance/target/insured-assurance.war #this is the path on VM/Runner
+      - name: Connect to LAB and run curl command to trigger a Job
+        uses: cross-the-world/ssh-scp-ssh-pipelines@latest
+        with:
+          host: '13.200.143.206' # lab server public IP
+          user: 'labuser'
+          pass: ${{ secrets.SSH_PASSWORD }}
+          port: 22
+          connect_timeout: 10s
+          first_ssh: |
+            sudo curl -l -u admin:${{ secrets.JENKINS_PASSWORD }} http://localhost:8080/job/deploy-insured-assurance/build?token=${{ secrets.JENKINS_REMOTEJOB_TOKEN }}
+          scp: |
+            './target/*.war' => /tmp
+          last_ssh: |
+            ls -al /tmp
       
