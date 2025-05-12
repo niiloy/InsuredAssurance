@@ -18,4 +18,9 @@ jobs:
         run: mvn test
       - name: Build the code
         run: mvn package
+      - name: Get the artifact and upload on github repo
+        uses: actions/upload-artifact@v4
+        with:
+         name: insured-assurance
+         path: /home/runner/work/InsuredAssurance/InsuredAssurance/target/insured-assurance.war #this is the path on VM/Runner
       
