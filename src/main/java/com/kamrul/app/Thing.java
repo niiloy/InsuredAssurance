@@ -1,5 +1,6 @@
 package com.geekcap.vmturbo;
 
+
 public class Thing {
   private int n = 0;
 
